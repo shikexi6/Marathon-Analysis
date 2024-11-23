@@ -2,7 +2,7 @@
 
 ## Analysis report
 
-Copyright (c) 2023
+Copyright (c) 2024
 
 This report (source contained in the [`marathon-analysis` repository](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd)) is made available under the **Attribution-NonCommercial-ShareAlike 4.0 International** ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)). 
 
@@ -70,4 +70,4 @@ Under the following terms:
 For more details, please see [https://creativecommons.org/licenses/by-nc-nd/4.0/](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 ### Attribution
-These contributing guidelines were adapted from the [breast cancer predictr contributing guidelines](https://github.com/ttimbers/breast_cancer_predictor_py/blob/main/LICENSE).
+These contributing guidelines were adapted from the [breast cancer predictr license](https://github.com/ttimbers/breast_cancer_predictor_py/blob/main/LICENSE).
