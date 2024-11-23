@@ -11,29 +11,26 @@ This study uses the dataset from a a public dataset on GitHub, containing 13 var
 ## Report
 
 The final report can be found
-[here](https://ttimbers.github.io/breast_cancer_predictor_py/).
+[here](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd).
 
 
 ## Usage
 
 Follow the instructions below to reproduce the analysis.
 
-1. [Install](https://www.docker.com/get-started/) 
-and launch Docker on your computer.
+1. Clone this GitHub repository.
 
-2. Clone this GitHub repository.
+2. Open the [`marathon-analysis.Rproj`](https://github.com/shikexi6/marathon-analysis/blob/main/marathon-analysis.Rproj) in RStudio
 
-3. Open the [`marathon-analysis.Rproj`](https://github.com/shikexi6/marathon-analysis/blob/main/marathon-analysis.Rproj) in RStudio
-
-4. Restore the computational environment by running in the console:
+3. Restore the computational environment by running in the console:
 
 ```
 renv::restore()
 ```
 
-5. Open the [`marathon.qmd`](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd) file in RStudio.
+4. Open the [`marathon.qmd`](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd) file in RStudio.
 
-6. Render the document to view the results by clicking the Render button or running:
+5. Render the document to view the results by clicking the Render button or running:
 
 ```
 quarto::quarto_render("marathon.qmd")
