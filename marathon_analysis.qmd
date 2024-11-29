@@ -10,6 +10,7 @@ library(tidyverse)
 library(fs)
 library(here)
 library(tidymodels)
+library(testthat)
 ```
 ## Summary
 
@@ -38,6 +39,29 @@ if (!fs::file_exists(here::here("data/marathon.csv"))) {
 ```{r}
 # read saved data
 marathon <- readr::read_csv(here::here("data/marathon.csv"))
+```
+
+## Data Validation Check
+### Correct Data File Format
+```{r}
+if (!inherits(marathon, "data.frame")) {
+  stop("The data file is not in the correct format. Expected a CSV to be read as a data frame.")
+}
+```
+### No Empty Observations
+```{r}
+empty_rows <- apply(marathon, 1, function(row) all(is.na(row)))
+if (any(empty_rows)) {
+  warning("There are completely empty observations. Consider removing these rows.")
+  marathon <- marathon[!empty_rows, ]
+}
+```
+### No Duplicate Observations
+```{r}
+if (any(duplicated(marathon))) {
+  warning("There are duplicate observations. Removing them now.")
+  marathon <- marathon[!duplicated(marathon), ]
+}
 ```
 
 We want to predict race time (in hours) (time_hrs) given a particular value of
