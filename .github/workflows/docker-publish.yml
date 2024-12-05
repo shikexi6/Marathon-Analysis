@@ -60,3 +60,8 @@ jobs:
           git add docker-compose.yml
           git commit -m "Update docker-compose.yml with new image tag"
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+      - name: Set up new version tag
+        run: |
+          NEW_TAG="0.0.$(date +%s)"
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
