@@ -36,10 +36,10 @@ docker compose up
 (for an example, see the highlighted text in the terminal below). 
 Copy and paste that URL into your browser.
 
-<img src="img/jupyter-container-web-app-launch-url.png" width=400>
+![jupyter-container-web-app-launch-url](./img/jupyter-container-web-app-launch-url.png)
 
 3. To run the analysis,
-open [`marathon.qmd`](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd) in Jupyter Lab you just launched
+open [`marathon.qmd`](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd) in Jupyter Lab you just launched from report folder
 and under the "Kernel" menu click "Restart Kernel and Run All Cells...".
 
 ### Clean up
