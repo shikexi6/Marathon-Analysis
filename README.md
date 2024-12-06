@@ -11,7 +11,7 @@ This study uses the dataset from a a public dataset on GitHub, containing 13 var
 ## Report
 
 The final report can be found
-[here](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd).
+[here](https://github.com/shikexi6/marathon-analysis/blob/main/report/marathon_analysis.pdf).
 
 
 ## Usage
