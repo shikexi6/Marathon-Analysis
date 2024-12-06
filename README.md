@@ -107,3 +107,13 @@ See [the license file](LICENSE.md) for more information. . If
 re-using/re-mixing please provide attribution and link to this webpage.
 The software code contained within this repository is licensed under the
 MIT license. See [the license file](LICENSE.md) for more information.
+
+## Reference
+
+* Zoladz, J. A., & Nieckarz, Z. (2021). Marathon race performance increases the amount of particulate matter deposited in the respiratory system of runners: an incentive for "clean air marathon runs". PeerJ, 9, e11562. https://doi.org/10.7717/peerj.11562
+
+* Kaufmann, C. C., Wegberger, C., Tscharre, M., Haller, P. M., Piackova, E., Vujasin, I., Kassem, M., Tentzeris, I., & Freynhofer, M. K. (2020). Effect of marathon and ultra-marathon on inflammation and iron homeostasis. Scandinavian Journal of Medicine & Science in Sports. https://doi.org/10.1111/sms.13869
+
+* Taraji, M., Haddad, P. R., Amos, R. I. J., Talebi, M., Szucs, R., Dolan, J. W., & Pohl, C. A. (2017). Error measures in quantitative structure-retention relationships studies. Journal of Chromatography A, 1524, 298-302. https://doi.org/10.1016/j.chroma.2017.09.050
+
+* Kolhatkar, V., & Östblom, J. (2023). Regression metrics [Lecture notes]. UBC GitHub Pages. https://pages.github.ubc.ca/mds-2024-25/DSCI_573_feat-model-select_students/lectures/02_regression-metrics.html
