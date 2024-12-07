@@ -9,8 +9,11 @@ format:
         embed-resources: true
     pdf:
         toc: true
-        toc-depth: 2
+        toc-depth: 3
         embed-resources: true
+        documentclass: scrartcl
+        header-includes:
+          - \usepackage{float}
 bibliography: references.bib
 editor: source
 ---
@@ -25,12 +28,12 @@ library(tidymodels)
 library(testthat)
 library(knitr)
 ```
-## Summary
+# Summary
 
 Over the last ten years, marathon running has become a popular physical activity around the world. This study aims to investigate the relationship between marathon runners' maximum distance ran per week during race training and their race time. We modeled a simple linear regression to predict marathon times based on their training patterns and tested on the model with the test dataset. By having this analysis, it helps marathon lovers to gain insights into how training volume influences race performance and to better prepare the race.
 
 
-## Introduction
+# Introduction
 
 Over the last ten years, marathon running has become a popular physical activity around the world @marathon. It is commonly known as a high-level endurance exercise that requires the runners to have dedicated training @kaufmann2020inflammation. The maximum distance ran per week during race training is a key metric that marathon lovers would care about and is a key reference to predict which athletes will perform better than others. Thus, this study will investigate how the maximum distance ran per week during race training will predict the time it takes a runner to finish the race. Specifically, we want to answer the question: What predicts which athletes will perform better than others? How the maximum distance ran per week (in miles) during race training predicts the time it takes a runner to finish the race? This study uses the dataset from a a public dataset on GitHub, containing 13 variables about runners, such as age, bmi, maximum training distance per week (max, in miles) and actual marathon race time (time_hrs, in hours) and so on.
 
@@ -58,9 +61,9 @@ if (!fs::file_exists(here::here("data/marathon.csv"))) {
 marathon <- readr::read_csv(here::here("data/marathon.csv"))
 ```
 
+```{r}
 ## Data Validation Check
 ### Correct Data File Format
-```{r}
 #| include: false
 #| echo: false
 if (!inherits(marathon, "data.frame")) {
@@ -79,12 +82,12 @@ if (any(duplicated(marathon))) {
 }
 ```
 
-## EDA
+# EDA
 We want to predict race time (in hours) (time_hrs) given a particular value of
 maximum distance ran per week (in miles) during race training (max).
 With this subset, we can plot a scatterplot to assess the relationship between these two variables.
 
-![Scatterplot of Sub Dataset Maximum Distance Ran per Week vs. Race Time](../results/subset_scatterplot_maxDistance_racetime.png){#fig-1 width="65%"}
+![Scatterplot of Sub Dataset Maximum Distance Ran per Week vs. Race Time](../results/subset_scatterplot_maxDistance_racetime.png){#fig-1 width="65%" fig-pos="H"}
 ```{r}
 #| include: false
 #| echo: false
@@ -104,7 +107,7 @@ subset_scatterplot_maxDistance_racetime
 
 Here's the full dataset of values.
 
-![Scatterplot of Full Dataset Maximum Distance Ran per Week vs. Race Time](../results/full_scatterplot_maxDistance_racetime.png){#fig-2 width="65%"}
+![Scatterplot of Full Dataset Maximum Distance Ran per Week vs. Race Time](../results/full_scatterplot_maxDistance_racetime.png){#fig-2 width="65%" fig-pos="H"}
 ```{r}
 #| include: false
 #| echo: false
@@ -116,7 +119,7 @@ full_scatterplot_maxDistance_racetime <- ggplot(marathon, aes(x = max, y = time_
 full_scatterplot_maxDistance_racetime
 ```
 
-## Analysis
+# Analysis
 
 We will analyze the data using simple linear regression to assess the relationship between maximum weekly distance and marathon race time. 
 We will first split the dataset into the training and testing datasets, using 75% of the original data as the training data. The training set was used to fit the model, while the test set was used for performance evaluation.
@@ -134,10 +137,12 @@ marathon_training <- rsample::training(marathon_split)
 marathon_testing <- rsample::testing(marathon_split)
 ```
 
-We can look at @fig-3 to assess the relationship between race time (time_hrs)
+![Scatterplot of Training Dataset Maximum Distance Ran per Week vs. Race Time](../results/training_scatterplot.png){#fig-ts width="65%" fig-pos="H"}
+
+We can look at @fig-ts to assess the relationship between race time (time_hrs)
 and maximum distance ran per week during training (max)
 using only the observations in the training dataset.
-![Scatterplot of Training Dataset Maximum Distance Ran per Week vs. Race Time](../results/training_scatterplot.png){#fig-3 width="65%"}
+
 ```{r}
 #| include: false
 #| echo: false
@@ -181,7 +186,7 @@ lm_fit <- workflows::workflow() |>
 
 ```
 
-## Results
+# Results
 
 Now, let's visualize the model predictions as a straight line overlaid on the training data.
 
@@ -193,7 +198,7 @@ marathon_preds <- lm_fit |>
   dplyr::bind_cols(marathon_training)
 
 ```
-![The Linear Regression of Maximum Distance Ran per Week And Race Time On Training Set](../results/training_prediction_plot.png){#fig-4 width="65%"}
+![The Linear Regression of Maximum Distance Ran per Week And Race Time On Training Set](../results/training_prediction_plot.png){#fig-4 width="65%" fig-pos="H"}
 ```{r}
 #| include: false
 #| echo: false
@@ -209,7 +214,7 @@ training_prediction_plot <- marathon_preds |>
 training_prediction_plot
 ```
 
-### Model Performance
+## Model Performance
 
 We can look at our model performance by looking at the RMSPE on the test data.
 
@@ -231,10 +236,11 @@ kable(lm_rmspe)
 
 The @tbl-rmspe stands for the Root Mean Squared Prediction Error, which is a scoring metric that reflects how right/wrong each prediction is. It measures the distance of the prediction from the actual values on the test data. Lower RMSPE values indicate better predictive performance, meaning that the model's predicted values are close to the actual observed values @TARAJI2017298. In our case, the RMSPE represents the average error in predicting marathon race time (in hours) for the runners. From the result of 0.5504829, This means that, our simple linear regression model's predictions deviate from the actual race times by approximately 0.55 hours on average. 
 
-### Prediction on test data
+## Prediction on test data
 
 Visualize the model predictions as a straight line overlaid on the test data
-![The Linear Regression Model Prediction Over Test Data](../results/test_prediction_plot.png){#fig-5 width="65%"}
+
+![The Linear Regression Model Prediction Over Test Data](../results/test_prediction_plot.png){#fig5 width="65%" fig-pos="H"}
 ```{r}
 #| include: false
 #| echo: false
@@ -267,10 +273,10 @@ By having @tbl-lrcoe, the slope coefficient is -0.0215, which shows a negative r
 
 If we want to manually calculate the marathon time, the formula will be like $times_{hrs} = 4.88 - 0.0215 \times max$, where $times_{hrs}$ is the race time and the $max$ is the maximum distance (in miles) ran per week during training.
 
-## Discussion
+# Discussion
 
 However, there are several limitations of the model. As we are trying to find what predicts which athletes will perform better than others, other features about the runners may also be crucial to play roles in affecting the race time, such as their age, bmi. Therefore, we may need to add more features to the model to better predict the race time. Also, these features may not in a linear relationship with the race time, so using a Random Forest model to handle the complex, non-linear interactions between features may be useful.
 
 To know whether the new model would be better than the simple linear regression or not, we can use those scoring metrics such as Mean squared error (MSE), Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE) and R-squared ($R^2$) on a test set or through cross-validation.A lower MSE, RMSE, MAE, MAPE would indicate that the new model makes more accurate predictions compared to the simple linear regression model. A higher R-squared would suggest that the model is explaining more variance in the target variable, implying better performance @kolhatkar2023regression.
 
-## Reference
+# Reference
