@@ -48,8 +48,9 @@ jobs:
       - name: Update docker-compose.yml with new image tag
         if: success()
         run: |
-          sed -i "s|image:  shikexi6/marathon-analysis:.*|image:  shikexi6/marathon-analysis:${{ steps.meta.outputs.version }}|" docker-compose.yml
-
+          TAG=$(echo "${{ steps.meta.outputs.tags }}" | cut -d ',' -f 1)
+          sed -i "s|image: shikexi6/marathon-analysis:.*|image: shikexi6/marathon-analysis:${TAG}|" docker-compose.yml
+      
       - name: Commit and push updated docker-compose.yml
         if: success()
         env:
