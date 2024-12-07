@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://packagemanager.posit.co/cran/latest"
+        "URL": "https://cran.rstudio.com"
       }
     ]
   },
@@ -266,41 +266,6 @@
         "utils"
       ],
       "Hash": "d7e13f49c19103ece9e58ad2d83a7354"
-    },
-    "cancensus": {
-      "Package": "cancensus",
-      "Version": "0.5.7",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "digest",
-        "dplyr",
-        "httr",
-        "jsonlite",
-        "rlang"
-      ],
-      "Hash": "e742655d7786e3c003c5925f6cb1d88f"
-    },
-    "canlang": {
-      "Package": "canlang",
-      "Version": "0.0.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "canlang",
-      "RemoteUsername": "ttimbers",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "1a543054af109f579b831827e9905159fd0d79b1",
-      "Requirements": [
-        "R",
-        "cancensus",
-        "dplyr",
-        "magrittr",
-        "stringr",
-        "tidyr"
-      ],
-      "Hash": "df3c5c5771cfa09144671f7f04456446"
     },
     "cellranger": {
       "Package": "cellranger",
@@ -741,17 +706,6 @@
       ],
       "Hash": "0efead26b03bb60716ed29971b1953dc"
     },
-    "gapminder": {
-      "Package": "gapminder",
-      "Version": "1.0.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "tibble"
-      ],
-      "Hash": "3a6fab978494586e851b8763996821d6"
-    },
     "gargle": {
       "Package": "gargle",
       "Version": "1.5.2",
@@ -1084,28 +1038,6 @@
       ],
       "Hash": "8954069286b4b2b0d023d1b288dce978"
     },
-    "janitor": {
-      "Package": "janitor",
-      "Version": "2.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "dplyr",
-        "hms",
-        "lifecycle",
-        "lubridate",
-        "magrittr",
-        "purrr",
-        "rlang",
-        "snakecase",
-        "stringi",
-        "stringr",
-        "tidyr",
-        "tidyselect"
-      ],
-      "Hash": "5baae149f1082f466df9d1442ba7aa65"
-    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -1378,17 +1310,6 @@
       ],
       "Hash": "df58958f293b166e4ab885ebcad90e02"
     },
-    "nycflights13": {
-      "Package": "nycflights13",
-      "Version": "1.0.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "tibble"
-      ],
-      "Hash": "61eb941328b49a62d7f9816dfed7d959"
-    },
     "openssl": {
       "Package": "openssl",
       "Version": "2.2.1",
@@ -1398,32 +1319,6 @@
         "askpass"
       ],
       "Hash": "c62edf62de70cadf40553e10c739049d"
-    },
-    "ottr": {
-      "Package": "ottr",
-      "Version": "1.5.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "R6",
-        "jsonlite",
-        "methods",
-        "testthat",
-        "tools",
-        "zip"
-      ],
-      "Hash": "68df24c27cb71784b4ee341e026bf662"
-    },
-    "palmerpenguins": {
-      "Package": "palmerpenguins",
-      "Version": "0.1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "6c6861efbc13c1d543749e9c7be4a592"
     },
     "parallelly": {
       "Package": "parallelly",
@@ -1790,18 +1685,6 @@
       ],
       "Hash": "97b1d5361a24d9fb588db7afe3e5bcbf"
     },
-    "repurrrsive": {
-      "Package": "repurrrsive",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "tibble",
-        "utils"
-      ],
-      "Hash": "83cf8bf4ada1dca8cfe94111c2a691d7"
-    },
     "rlang": {
       "Package": "rlang",
       "Version": "1.1.4",
@@ -1996,18 +1879,6 @@
         "warp"
       ],
       "Hash": "5dbae6fb8e910b174bc3428164f4e8f8"
-    },
-    "snakecase": {
-      "Package": "snakecase",
-      "Version": "0.11.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "stringi",
-        "stringr"
-      ],
-      "Hash": "58767e44739b76965332e8a4fe3f91f1"
     },
     "stringi": {
       "Package": "stringi",
@@ -2537,13 +2408,6 @@
         "withr"
       ],
       "Hash": "9ce4117141b326c4fffc7c42e56e0f88"
-    },
-    "zip": {
-      "Package": "zip",
-      "Version": "2.3.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "fcc4bd8e6da2d2011eb64a5e5cc685ab"
     }
   }
 }

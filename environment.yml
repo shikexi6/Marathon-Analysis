@@ -7,3 +7,4 @@ dependencies:
   - r-ggplot2=3.4.0
   - mamba
   - conda-lock
+  - quarto=1.4.4

@@ -38,9 +38,25 @@ Copy and paste that URL into your browser.
 
 ![jupyter-container-web-app-launch-url](./img/jupyter-container-web-app-launch-url.png)
 
-3. To run the analysis,
-open [`marathon.qmd`](https://github.com/shikexi6/marathon-analysis/blob/main/marathon_analysis.qmd) in Jupyter Lab you just launched from report folder
-and under the "Kernel" menu click "Restart Kernel and Run All Cells...".
+3. Connect to the instance of RStudio that is running in the container by visiting <http://localhost:8787/>. 
+
+4. Open a terminal (from the docker rstudio) and run the following commands:
+
+```bash
+Rscript scripts/download_data.R "https://raw.githubusercontent.com/UBC-DSCI/dsci-100-student/refs/heads/master/materials/R/worksheet_regression2/data/marathon.csv" "data/marathon.csv"
+```
+```bash
+Rscript scripts/validate_data.R "data/marathon.csv"
+```
+```bash
+Rscript scripts/eda.R "data/marathon.csv" "results/subset_scatterplot_maxDistance_racetime.png" "results/full_scatterplot_maxDistance_racetime.png"
+```
+```bash
+Rscript scripts/analysis.R "data/marathon.csv" "results/training_scatterplot.png" "results/training_prediction_plot.png" "results/test_prediction_plot.png"
+```
+```bash
+quarto render report/marathon_analysis.qmd --to pdf
+```
 
 ### Clean up
 
