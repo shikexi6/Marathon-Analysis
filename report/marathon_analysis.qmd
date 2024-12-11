@@ -21,6 +21,10 @@ editor: source
 ```{r}
 #| include: false
 #| echo: false
+
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+install.packages("here")
+install.packages("tidymodels")
 library(tidyverse)
 library(fs)
 library(here)
