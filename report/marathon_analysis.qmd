@@ -16,6 +16,10 @@ format:
           - \usepackage{float}
 bibliography: references.bib
 editor: source
+execute:
+  echo: false
+  warning: false
+  message: false
 ---
 
 ```{r, include=FALSE}
