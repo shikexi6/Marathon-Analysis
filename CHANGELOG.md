@@ -1,0 +1,5 @@
+* Milestone 1: On GradeScope, the Grading comment: File contents not clear enough for someone to understand how contributions to the project should be made
+    - URL of Improvement: https://github.com/shikexi6/marathon-analysis/commit/1b386123f529db64f3cd74944f8d70a1e4ba6723#diff-eca12c0a30e25b4b46522ebf89465a03ba72a03f540796c979137931d8f92055R4
+
+* Milestone 1: On GradeScope, the Grading comment: The analysis notebook (.ipynb or .Qmd or *Rmd) should be in a sub-directory called something sensible, such as analysis, src, notebooks, docs, etc, to aid in the discoverability of this file, and related ones. Having too many files in the project root makes the project organization less understandable and can lead to longer activation times to productivity for collaborators (including future you!). Files such as .DS_Store and .ipynb_checkpoints should not be committed.
+    - URL of Improvement: https://github.com/shikexi6/marathon-analysis/commit/d03e62f277a63c82c5b1b312b85420c5e2c1a0b7

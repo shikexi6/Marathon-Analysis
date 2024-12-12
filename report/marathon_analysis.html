@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Kexin Shi">
-<meta name="dcterms.date" content="2024-12-10">
+<meta name="dcterms.date" content="2024-12-12">
 
 <title>Marathon Race Time Prediction</title>
 <style>
@@ -20,40 +20,6 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
-}
-
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 
 div.csl-bib-body { }
@@ -3248,6 +3214,7 @@ window.Quarto = {
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">EDA</a></li>
+  <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">Method</a></li>
   <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
   <ul class="collapse">
   <li><a href="#training-data" id="toc-training-data" class="nav-link" data-scroll-target="#training-data">Training Data</a></li>
@@ -3262,7 +3229,7 @@ window.Quarto = {
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../marathon_analysis.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="marathon_analysis.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -3285,7 +3252,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 10, 2024</p>
+      <p class="date">December 12, 2024</p>
     </div>
   </div>
   
@@ -3304,26 +3271,6 @@ window.Quarto = {
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>Over the last ten years, marathon running has become a popular physical activity around the world <span class="citation" data-cites="marathon">Zoladz and Nieckarz (<a href="#ref-marathon" role="doc-biblioref">2021</a>)</span>. It is commonly known as a high-level endurance exercise that requires the runners to have dedicated training <span class="citation" data-cites="kaufmann2020inflammation">Kaufmann et al. (<a href="#ref-kaufmann2020inflammation" role="doc-biblioref">2020</a>)</span>. The maximum distance ran per week during race training is a key metric that marathon lovers would care about and is a key reference to predict which athletes will perform better than others. Thus, this study will investigate how the maximum distance ran per week during race training will predict the time it takes a runner to finish the race. Specifically, we want to answer the question: What predicts which athletes will perform better than others? How the maximum distance ran per week (in miles) during race training predicts the time it takes a runner to finish the race? This study uses the dataset from a a public dataset on GitHub, containing 13 variables about runners, such as age, bmi, maximum training distance per week (max, in miles) and actual marathon race time (time_hrs, in hours) and so on.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Data Validation Check</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Correct Data File Format</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">inherits</span>(marathon, <span class="st">&quot;data.frame&quot;</span>)) {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;The data file is not in the correct format. Expected a CSV to be read as a data frame.&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>empty_rows <span class="ot">&lt;-</span> <span class="fu">apply</span>(marathon, <span class="dv">1</span>, <span class="cf">function</span>(row) <span class="fu">all</span>(<span class="fu">is.na</span>(row)))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(empty_rows)) {</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="st">&quot;There are completely empty observations. Consider removing these rows.&quot;</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  marathon <span class="ot">&lt;-</span> marathon[<span class="sc">!</span>empty_rows, ]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">duplicated</span>(marathon))) {</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="st">&quot;There are duplicate observations. Removing them now.&quot;</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  marathon <span class="ot">&lt;-</span> marathon[<span class="sc">!</span><span class="fu">duplicated</span>(marathon), ]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="eda" class="level1">
 <h1>EDA</h1>
@@ -3350,9 +3297,12 @@ Figure 2: Scatterplot of Full Dataset Maximum Distance Ran per Week vs. Race T
 </figure>
 </div>
 </section>
+<section id="method" class="level1">
+<h1>Method</h1>
+<p>From the plots shown in the EDA section, we observed an approximate negatively correlated relationship between maximum weekly distance and marathon race time. To further explore it, we will analyze the data using simple linear regression to assess the relationship between maximum weekly distance and marathon race time. We assume We will first split the dataset into the training and testing datasets, using 75% of the original data as the training data. The training set was used to fit the model, while the test set was used for performance evaluation. We will predict on the test dataset with the model to evaluate the model’s performance on unseen data. In the strata argument of the initial_split function, we will use the variable we are trying to predict. RMSPE is the main metric that we will use to evaluate the model performance, which stands for Root Mean Squared Error. Although scoring multiple models with either MSE or RMSE would yield the same ranking of the models, communicating erros in RMSE are often easier to understand.</p>
+</section>
 <section id="analysis" class="level1">
 <h1>Analysis</h1>
-<p>We will analyze the data using simple linear regression to assess the relationship between maximum weekly distance and marathon race time. We will first split the dataset into the training and testing datasets, using 75% of the original data as the training data. The training set was used to fit the model, while the test set was used for performance evaluation. In the strata argument of the initial_split function, we will use the variable we are trying to predict.</p>
 <section id="training-data" class="level2">
 <h2 class="anchored" data-anchor-id="training-data">Training Data</h2>
 <div id="fig-ts" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H">
@@ -3388,14 +3338,14 @@ Figure 4: The Linear Regression of Maximum Distance Ran per Week And Race Time 
 </div>
 <section id="model-performance" class="level2">
 <h2 class="anchored" data-anchor-id="model-performance">Model Performance</h2>
-<p>We can look at our model performance by looking at the RMSPE on the test data.</p>
+<p>We can look at our model performance by looking at the RMSE on the test data.</p>
 <div class="cell">
-<div id="tbl-rmspe" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<div id="tbl-rmse" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rmspe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 1: Linear Regression ON RMSPE Metric
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rmse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 1: Linear Regression ON RMSE Metric
 </figcaption>
-<div aria-describedby="tbl-rmspe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-rmse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
@@ -3414,7 +3364,7 @@ Table 1: Linear Regression ON RMSPE Metric
 </figure>
 </div>
 </div>
-<p>The <a href="#tbl-rmspe" class="quarto-xref">Table 1</a> stands for the Root Mean Squared Prediction Error, which is a scoring metric that reflects how right/wrong each prediction is. It measures the distance of the prediction from the actual values on the test data. Lower RMSPE values indicate better predictive performance, meaning that the model’s predicted values are close to the actual observed values <span class="citation" data-cites="TARAJI2017298">Taraji et al. (<a href="#ref-TARAJI2017298" role="doc-biblioref">2017</a>)</span>. In our case, the RMSPE represents the average error in predicting marathon race time (in hours) for the runners. From the result of 0.5504829, This means that, our simple linear regression model’s predictions deviate from the actual race times by approximately 0.55 hours on average.</p>
+<p>The <a href="#tbl-rmse" class="quarto-xref">Table 1</a> stands for the Root Mean Squared Prediction Error, which is a scoring metric that reflects how right/wrong each prediction is. It measures the distance of the prediction from the actual values on the test data. Lower RMSPE values indicate better predictive performance, meaning that the model’s predicted values are close to the actual observed values <span class="citation" data-cites="TARAJI2017298">Taraji et al. (<a href="#ref-TARAJI2017298" role="doc-biblioref">2017</a>)</span>. In our case, the RMSPE represents the average error in predicting marathon race time (in hours) for the runners. From the result of 0.5504829, This means that, our simple linear regression model’s predictions deviate from the actual race times by approximately 0.55 hours on average.</p>
 </section>
 <section id="prediction-on-test-data" class="level2">
 <h2 class="anchored" data-anchor-id="prediction-on-test-data">Prediction on test data</h2>

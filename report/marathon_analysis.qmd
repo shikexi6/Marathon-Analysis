@@ -18,7 +18,7 @@ bibliography: references.bib
 editor: source
 ---
 
-```{r}
+```{r, include=FALSE}
 #| include: false
 #| echo: false
 
@@ -41,7 +41,7 @@ Over the last ten years, marathon running has become a popular physical activity
 
 Over the last ten years, marathon running has become a popular physical activity around the world @marathon. It is commonly known as a high-level endurance exercise that requires the runners to have dedicated training @kaufmann2020inflammation. The maximum distance ran per week during race training is a key metric that marathon lovers would care about and is a key reference to predict which athletes will perform better than others. Thus, this study will investigate how the maximum distance ran per week during race training will predict the time it takes a runner to finish the race. Specifically, we want to answer the question: What predicts which athletes will perform better than others? How the maximum distance ran per week (in miles) during race training predicts the time it takes a runner to finish the race? This study uses the dataset from a a public dataset on GitHub, containing 13 variables about runners, such as age, bmi, maximum training distance per week (max, in miles) and actual marathon race time (time_hrs, in hours) and so on.
 
-```{r}
+```{r, include=FALSE}
 #| include: false
 #| echo: false
 # download and save data
@@ -65,7 +65,7 @@ if (!fs::file_exists(here::here("data/marathon.csv"))) {
 marathon <- readr::read_csv(here::here("data/marathon.csv"))
 ```
 
-```{r}
+```{r, include=FALSE}
 ## Data Validation Check
 ### Correct Data File Format
 #| include: false
@@ -123,12 +123,13 @@ full_scatterplot_maxDistance_racetime <- ggplot(marathon, aes(x = max, y = time_
 full_scatterplot_maxDistance_racetime
 ```
 
+# Method
+
+From the plots shown in the EDA section, we observed an approximate negatively correlated relationship between maximum weekly distance and marathon race time. To further explore it, we will analyze the data using simple linear regression to assess the relationship between maximum weekly distance and marathon race time. We assume
+We will first split the dataset into the training and testing datasets, using 75% of the original data as the training data. The training set was used to fit the model, while the test set was used for performance evaluation. We will predict on the test dataset with the model to evaluate the model's performance on unseen data. In the strata argument of the initial_split function, we will use the variable we are trying to predict. RMSPE is the main metric that we will use to evaluate the model performance, which stands for Root Mean Squared Error. Although scoring multiple models with either MSE or RMSE would yield the same ranking of the models, communicating erros in RMSE are often easier to understand.
+
+
 # Analysis
-
-We will analyze the data using simple linear regression to assess the relationship between maximum weekly distance and marathon race time. 
-We will first split the dataset into the training and testing datasets, using 75% of the original data as the training data. The training set was used to fit the model, while the test set was used for performance evaluation.
-In the strata argument of the initial_split function, we will use the variable we are trying to predict.
-
 ## Training Data
 
 ```{r}
@@ -220,25 +221,25 @@ training_prediction_plot
 
 ## Model Performance
 
-We can look at our model performance by looking at the RMSPE on the test data.
+We can look at our model performance by looking at the RMSE on the test data.
 
 ```{r message=FALSE, echo=FALSE}
-#| label: tbl-rmspe
-#| tbl-cap: "Linear Regression ON RMSPE Metric"
+#| label: tbl-rmse
+#| tbl-cap: "Linear Regression ON RMSE Metric"
 
 lm_test_results <- lm_fit |>
   predict(marathon_testing) |>
   dplyr::bind_cols(marathon_testing) |>
   yardstick::metrics(truth = time_hrs, estimate = .pred)
 
-lm_rmspe <- lm_test_results |>
+lm_rmse <- lm_test_results |>
   dplyr::filter(.metric == 'rmse') |>
   dplyr::select(.estimate) |>
   dplyr::pull()
-kable(lm_rmspe)
+kable(lm_rmse)
 ```
 
-The @tbl-rmspe stands for the Root Mean Squared Prediction Error, which is a scoring metric that reflects how right/wrong each prediction is. It measures the distance of the prediction from the actual values on the test data. Lower RMSPE values indicate better predictive performance, meaning that the model's predicted values are close to the actual observed values @TARAJI2017298. In our case, the RMSPE represents the average error in predicting marathon race time (in hours) for the runners. From the result of 0.5504829, This means that, our simple linear regression model's predictions deviate from the actual race times by approximately 0.55 hours on average. 
+The @tbl-rmse stands for the Root Mean Squared Prediction Error, which is a scoring metric that reflects how right/wrong each prediction is. It measures the distance of the prediction from the actual values on the test data. Lower RMSPE values indicate better predictive performance, meaning that the model's predicted values are close to the actual observed values @TARAJI2017298. In our case, the RMSPE represents the average error in predicting marathon race time (in hours) for the runners. From the result of 0.5504829, This means that, our simple linear regression model's predictions deviate from the actual race times by approximately 0.55 hours on average. 
 
 ## Prediction on test data
 
