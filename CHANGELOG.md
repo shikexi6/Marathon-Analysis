@@ -8,6 +8,12 @@
 * Review comments from jasonmiee: Model Performance: I suggest adding a sentence that clarifies why RMSPE was used as the scoring metric for this analysis. (i.e Did you use this metric because you wanted an interpretable error metric that has the same units as the response variable?)
     - URL of Improvement: https://github.com/shikexi6/marathon-analysis/commit/c1a3fddb4f3ee6778fd37131a626bd47e70417bc#diff-55f43050dc09f2fd89ea3b8cf9eb777be6cd5c65a94a47bf31cb39e5347bd264R3302
 
+* Milestone 2: On GradeScope, the Grading comment: Could not reproducibly run the analysis because the computational environment cannot be recreated from the provided instructions and/or environment specification files. 'No module named 'jupyter_core''
+* Review comments from vrudhgarg: Environment Setup: It seems like the environment setup with docker compose up is not working as expected. Check the Docker configuration to resolve this. Automation Issues: Automation seems to be having problems with this Docker environment.
+* Review comments from Arc-Celt: Currently I failed to use docker compose up to reproduce the data analysis, with two ModuleNotFoundError issues for conda and jupyter_core. It would be great if you could take another look and see how to resolve this. I recommend revisiting your envirnonment.yml, the corresponding conda-linux-64.lock, Dockerfile and docker-compose.yml files to ensure all dependencies are correctly included.
+* Review comments from jasonmiee: Reproducibility: I wasn't able to successfully build the docker container using docker compose up to reproduce the data analysis (see screenshot below for the error message). There were mainly 2 ModuleNotFoundError issues for conda and jupyter_core. Please try to resolve this by reviewing all relevant environment files.
+    - URL of Improvement: https://github.com/shikexi6/marathon-analysis/commit/9334f12d44025c96b13d87019cafc1d4731fc4c4
+
 * Review comments from gurmehak:
     - Analysis Report Quality: The report is concise and very readable overall, but the code chunk in the summary section of your analysis report could be off-putting for someone without a technical background. I believe you tried to suppress the code chunk with echo: False in that particular code block, but it didn't render correctly in the final report. To ensure this is applied globally, include the command in the YAML section of the QMD file. This way, you won't have to specify it in each code block to prevent the code display.
         - URL of Improvement:  https://github.com/shikexi6/marathon-analysis/commit/18d82ded5aaccf158cb41c9691c65bdc0ffdcd2e
@@ -22,5 +28,6 @@
         - URL of Improvement: https://github.com/shikexi6/marathon-analysis/commit/2ed0b28e6df4202c99d6345bab844d4e801c1b5e
     - Research Question Clarity: The research question should be worded more clearly so others can understand it clearly when reviewing the project.
         - URL of Improvement: https://github.com/shikexi6/marathon-analysis/commit/e2f0ef9043e60e59338411122efef3d1dec31976
+
 
 
