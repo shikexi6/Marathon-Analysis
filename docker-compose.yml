@@ -1,7 +1,7 @@
 services:
   # run jupyter notebook inside jupyter 
   jupyter-notebook:
-    image:  shikexi6/marathon-analysis:21c588b
+    image: testing_cmds
     ports:
       - "8888:8888"
     volumes:

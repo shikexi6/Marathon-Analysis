@@ -1,10 +1,15 @@
 name: 522_m3
 channels:
   - conda-forge
+  - defaults
 dependencies:
-  - r-base=4.2.3
+  - r-base>=4.1,<4.2.0
   - r-dplyr=1.1.0
   - r-ggplot2=3.4.0
-  - mamba
-  - conda-lock
-  - quarto=1.4.4
+  - quarto=1.5.57
+  - conda-lock=2.5.7       
+  - mamba=1.5.11
+  - conda=24.11
+  - notebook
+  - jupyter_core
+  - python=3.11
